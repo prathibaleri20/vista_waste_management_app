@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/marketplace_provider.dart';
-import '../../models/waste_item.dart'; // Add this import
+// Add this import
 import '../../utils/colors.dart';
-import '../../widgets/custom_card.dart';
 import 'buy_waste_screen.dart';
 import 'sell_waste_screen.dart';
 
@@ -37,7 +36,34 @@ class _MarketplaceScreenState extends State<MarketplaceScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Marketplace'),
+        title: Column(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Row(
+      children: [
+        ClipOval(
+          child: Image.asset(
+            'assets/vista.png', // your logo path
+            height: 40,
+            width: 40,
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SizedBox(width: 120),
+        const Text(
+          'MarketPlace',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+            color: Colors.white,
+          ),
+        ),
+      ],
+    ),
+    const SizedBox(height: 4),
+  ],
+),
+centerTitle: true,
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         bottom: TabBar(
@@ -105,8 +131,8 @@ class _BuyWasteListTab extends StatelessWidget {
                   child: const Icon(Icons.eco, color: Colors.green),
                 ),
                 title: Text(item.title),
-                subtitle: Text('${item.weight} kg - \$${item.pricePerKg}/kg'),
-                trailing: Text('\$${(item.weight * item.pricePerKg).toStringAsFixed(2)}'),
+                subtitle: Text('${item.weight} kg - Rs.${item.pricePerKg}/kg'),
+                trailing: Text('Rs.${(item.weight * item.pricePerKg).toStringAsFixed(2)}'),
                 onTap: () {
                   Navigator.push(
                     context,
